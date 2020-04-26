@@ -1,0 +1,36 @@
+.slider-area {
+    height: calc(100vh - 70px);
+    width: 100%;
+    margin-top: 70px;
+    position: relative;
+}
+
+.slider-area .slider-btn {
+    position: absolute;
+    top: calc(50% - 1rem);
+    color: white; 
+    cursor: pointer;
+    z-index: 1;
+}
+
+.slider-area .prev-btn {
+    left: 0;
+    transform: rotate(-90deg);
+}
+
+.slider-area .next-btn {
+    left: calc(100% - 5rem);
+    transform: rotate(90deg);
+}
+
+.slider-image {
+    height: 70%;
+}
+
+.slide-body {
+    position: absolute;
+    top: 0;
+    left: 30px;
+    transition: ease-in-out all 0.5s;
+    opacity: 0;
+}

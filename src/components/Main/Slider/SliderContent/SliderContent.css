@@ -1,0 +1,7 @@
+.hide-content {
+    opacity: 0;
+}
+
+.show-content {
+    opacity: 1;
+}

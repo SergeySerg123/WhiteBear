@@ -1,0 +1,36 @@
+.slider-paginator {
+    position: absolute;
+    top: calc(100% - 100px);
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    font-size: 18pt;
+    color: #b8a0c5;
+}
+
+.slider-paginator ul {
+    padding: 0;
+}
+
+.slider-paginator ul li {
+    list-style-type: none;
+    display: inline;
+    margin: 0 10px;
+    transition: 0.5s all;
+    cursor: pointer;
+}
+
+.slider-paginator ul li.active {
+    color: #fff;
+    position: relative;
+}
+
+.slider-paginator ul li.active::after {
+    content: '';
+    position: absolute;
+    background-color: white;
+    width: 14px;
+    height: 2px;
+    left: 0;
+    top: 100%;
+}

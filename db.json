@@ -1,0 +1,19 @@
+{
+    "slides": [
+        {
+            "title" : "The 1st slide title",
+            "description": "Lorem Ipsum - это текст часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной текстов на латинице с начала XVI века. В то время некий.",
+            "image": "Music-item.png"
+        },
+        {
+            "title" : "The 2nd slide title",
+            "description": "Lorem Ipsum - это текст часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной текстов на латинице с начала XVI века. В то время некий.",
+            "image": "Music-item.png"
+        },
+        {
+            "title" : "The 3rd slide title",
+            "description": "Lorem Ipsum - это текст часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной текстов на латинице с начала XVI века. В то время некий.",
+            "image": "Music-item.png"
+        }
+    ]
+}
