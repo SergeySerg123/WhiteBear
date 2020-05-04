@@ -55,7 +55,7 @@ class Shop extends React.Component {
             <Col xs="10">
               <Row>
                 {
-                  this.props.products.map((product, i) => (
+                  this.props.products.slice(0,4).map((product, i) => (
                     <Col  xs="3">
                       <ProductItem
                         key={i}                      
