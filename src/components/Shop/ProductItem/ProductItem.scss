@@ -1,0 +1,35 @@
+@import "../../../colors.scss";
+
+.product-item-card {
+  margin: 10px;
+
+  img {
+    padding: 10px;
+    // height: 200px;
+  }
+}
+
+.grey-background {
+  background-color: #f4f6f8;
+}
+
+.price-color {
+  float: right;
+  color: $blue;
+}
+
+.raiting {
+  color: $blueLight;
+}
+
+.raiting-negative {
+  color: #cccccc;
+}
+
+.color-btn {
+  background-color: $blue;
+}
+
+.color-btn:hover {
+  background-color: $darkBlue;
+}

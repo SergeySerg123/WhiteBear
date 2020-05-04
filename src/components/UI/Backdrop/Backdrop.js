@@ -13,7 +13,10 @@ const backdrop = (props) => {
     }
 
     return (
-        <div className="backdrop" style={props.isOpenedMenu ? show : hide}></div>
+        <div className="backdrop" 
+            style={props.isOpenedMenu || props.isOpenedCard ? show : hide}>
+
+        </div>
     )
 }
 

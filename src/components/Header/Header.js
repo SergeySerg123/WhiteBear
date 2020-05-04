@@ -8,14 +8,22 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Backdrop from "../UI/Backdrop/Backdrop";
 import LeftMenu from "../LeftMenu/LeftMenu";
-import "./Header.css";
+import CardCounter from '../Card/CardCounter/CardCounter';
+import "./Header.scss";
+import Card from "../Card/Card";
+import { connect } from "react-redux";
 
 class Header extends React.Component {
   constructor() {
     super();
     this.state = {
       isOpenedMenu: false,
+      isOpenedCard: true
     };
+  }
+
+  toggleCard() {
+    this.setState({ isOpenedCard: !this.state.isOpenedCard });
   }
 
   toggleNavbar() {
@@ -31,11 +39,14 @@ class Header extends React.Component {
   render() {
     return (
       <header className={this.isWhiteHeader()}>
-        <Backdrop isOpenedMenu={this.state.isOpenedMenu} />
+        <Backdrop 
+          isOpenedMenu={this.state.isOpenedMenu} 
+          isOpenedCard={this.state.isOpenedCard} />
         <LeftMenu
           navbarToggle={() => this.toggleNavbar()}
           isOpenedMenu={this.state.isOpenedMenu}
         />
+        <Card isOpened={this.state.isOpenedCard}  toggleCard={() => this.toggleCard()} />
         <Container>
           <Row className="pt-3">
             <Col sm="4" className="d-flex align-items-center">
@@ -50,9 +61,10 @@ class Header extends React.Component {
             <Col sm="4" className="d-flex align-items-center text-center">
               <div>White Bear - твій улюблений смак пива!</div>
             </Col>
-            <Col sm="4" className="text-right">
+            <Col sm="4" className="text-right position-relative">
               <FontAwesomeIcon className="mr-3" icon={faSearch} size="2x" />
-              <FontAwesomeIcon icon={faShoppingCart} size="2x" />
+              <FontAwesomeIcon className="cursor-pointer" onClick={() => this.toggleCard()} icon={faShoppingCart} size="2x" />
+              <CardCounter itemsInCard={this.props.itemsInCard} />
             </Col>
           </Row>
         </Container>
@@ -61,4 +73,10 @@ class Header extends React.Component {
   }
 }
 
-export default Header;
+const mapStateToProps = (state) => {
+  return {
+    itemsInCard: state.card.products.length
+  }
+}
+
+export default connect(mapStateToProps, null)(Header);

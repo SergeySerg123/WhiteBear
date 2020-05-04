@@ -1,0 +1,15 @@
+@import '../../../colors.scss';
+
+.bottle-container {
+    border: 1px solid gray;
+    width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bottle-container:hover {
+    cursor: pointer;
+    color: $blue;
+    border: 1px solid $blue;
+}

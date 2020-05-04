@@ -1,0 +1,12 @@
+@import '../../../colors.scss';
+
+.card-counter {
+    background-color: $darkBlue;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    top: -10px;
+    font-weight: 500;
+    right: 5px;
+    position: absolute;
+}

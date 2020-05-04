@@ -4,14 +4,13 @@ import {
     loadingSliderDataSucceed, 
     loadingSliderDataFailured 
 } from "../store/actions/slider.action";
-
-const baseUrl = "http://localhost:5000";
+import { BASE_URL } from "../config/config";
 
 export function loadSlides() {
     return dispatch => {
         dispatch(loadingSliderDataStarted());
         Axios
-            .get(baseUrl + '/slides')
+            .get(BASE_URL + '/slides')
             .then(res => dispatch(loadingSliderDataSucceed(res.data)))
             .catch(err => dispatch(loadingSliderDataFailured(err)));
     } 

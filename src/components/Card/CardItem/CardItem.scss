@@ -1,0 +1,41 @@
+
+
+.card-item-content {
+    min-height: auto;
+    margin-top: 20px;
+
+    .card-delete-item-btn {
+        svg {
+            color: gray;
+        }
+    }
+    
+    .image-item {
+        width: 60px;
+        height: 60px;
+        display: inline-block;
+
+        img{
+            width: 100%;
+            height: 100%;
+            background-color: #f4f6f8;
+            padding: 5px;
+        }
+    }
+
+    .description-item-area {
+        margin-left: 20px;
+        display: inline-block;
+        width: calc(100% - 80px);
+
+        .item-title {
+            width: 80%;
+            display: inline-block;
+        }
+
+        .price-area {
+            width: 20%;
+            display: inline-block;
+        }
+    }
+}
