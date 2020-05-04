@@ -18,7 +18,7 @@ class Header extends React.Component {
     super();
     this.state = {
       isOpenedMenu: false,
-      isOpenedCard: true
+      isOpenedCard: false
     };
   }
 
