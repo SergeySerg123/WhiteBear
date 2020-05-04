@@ -5,21 +5,38 @@ import ProductItem from "./ProductItem/ProductItem";
 import { connect } from "react-redux";
 import { addToCard } from "../../store/actions/card.action";
 import { loadProducts } from "../../services/Shop";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSync } from "@fortawesome/free-solid-svg-icons";
 import  RefreshDataArrow  from "./RefreshDataArrow/RefreshDataArrow";
 
 class Shop extends React.Component {
   constructor() {
     super();
+    this.state = {
+      items: 12,
+      loading: false
+    };
   }
 
   componentDidMount() {
     this.props.onLoadProducts();
-    window.addEventListener('scroll', this.onScrollToBottom);
+    // Detect when scrolled to bottom.
+    window.addEventListener("scroll", this.onScrollHandler);
   }
 
   componentWillUnmount() {
-    window.removeEventListener('scroll', this.onScrollToBottom);
-  } 
+    window.removeEventListener("scroll", this.onScrollHandler);
+  }
+
+  
+
+  showItems() {
+    let items = [];
+    for (let i = 0; i < this.state.items; i++) {
+      items.push(<li key={i}>Item {i}</li>);
+    }
+    return items;
+  }
 
   addToCard(id) {
     const item = this.props.products.find((item) => item.id === id);
@@ -28,13 +45,23 @@ class Shop extends React.Component {
     }
   }
 
-  onScrollToBottom = () => {
-    console.log('Scroll to bottom');
+  loadMore() {
+    console.log('load more');
   }
+
+  onScrollHandler = () => {
+    const d = document.documentElement;
+    if (
+      d.scrollTop + d.clientHeight >=
+      this.refs.shopScroll.scrollHeight
+    ) {
+      this.loadMore();
+    }
+  };
 
   render() {
     return (
-      <section className="shop-section">
+      <div className="shop-section" ref="shopScroll" >
         <Container fluid="sm">
           <Row>
             <Col xs="2" className="right-border pl-3">
@@ -63,27 +90,26 @@ class Shop extends React.Component {
             </Col>
             <Col xs="10">
               <Row>
-                {
-                  this.props.products.slice(0,4).map((product, i) => (
-                    <Col  xs="3">
-                      <ProductItem
-                        key={i}                      
-                        productId={product.id}
-                        title={product.title}
-                        image={product.image}
-                        description={product.description}
-                        price={product.price}
-                        addToCard={(id) => this.addToCard(id)}
-                      />
-                    </Col>
-                  ))
-                }
-                <RefreshDataArrow />
+                {this.props.products.map((product, i) => (
+                  <Col xs="3">
+                    <ProductItem
+                      key={i}
+                      productId={product.id}
+                      title={product.title}
+                      image={product.image}
+                      description={product.description}
+                      price={product.price}
+                      addToCard={(id) => this.addToCard(id)}
+                    />
+                  </Col>
+                ))}
+                  
+                <RefreshDataArrow  />
               </Row>
             </Col>
           </Row>
         </Container>
-      </section>
+      </div>
     );
   }
 }
