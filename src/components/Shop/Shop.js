@@ -5,6 +5,7 @@ import ProductItem from "./ProductItem/ProductItem";
 import { connect } from "react-redux";
 import { addToCard } from "../../store/actions/card.action";
 import { loadProducts } from "../../services/Shop";
+import  RefreshDataArrow  from "./RefreshDataArrow/RefreshDataArrow";
 
 class Shop extends React.Component {
   constructor() {
@@ -68,6 +69,7 @@ class Shop extends React.Component {
                     </Col>
                   ))
                 }
+                <RefreshDataArrow />
               </Row>
             </Col>
           </Row>
