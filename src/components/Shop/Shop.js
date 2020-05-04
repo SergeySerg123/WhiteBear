@@ -5,14 +5,38 @@ import ProductItem from "./ProductItem/ProductItem";
 import { connect } from "react-redux";
 import { addToCard } from "../../store/actions/card.action";
 import { loadProducts } from "../../services/Shop";
+import  RefreshDataArrow  from "./RefreshDataArrow/RefreshDataArrow";
 
 class Shop extends React.Component {
   constructor() {
     super();
+    this.state = {
+      items: 12,
+      loading: false
+    };
   }
 
   componentDidMount() {
     this.props.onLoadProducts();
+    window.addEventListener("scroll", this.onScrollHandler);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this.onScrollHandler);
+  }
+
+  onScrollHandler = () => {
+    const d = document.documentElement;
+    if (
+      d.scrollTop + d.clientHeight >=
+      this.refs.shopScroll.scrollHeight
+    ) {
+      this.loadMoreItems();
+    }
+  };
+
+  loadMoreItems() {
+    console.log('load more');
   }
 
   addToCard(id) {
@@ -24,7 +48,7 @@ class Shop extends React.Component {
 
   render() {
     return (
-      <section className="shop-section">
+      <div className="shop-section" ref="shopScroll" >
         <Container fluid="sm">
           <Row>
             <Col xs="2" className="right-border pl-3">
@@ -53,26 +77,26 @@ class Shop extends React.Component {
             </Col>
             <Col xs="10">
               <Row>
-                {
-                  this.props.products.map((product, i) => (
-                    <Col  xs="3">
-                      <ProductItem
-                        key={i}                      
-                        productId={product.id}
-                        title={product.title}
-                        image={product.image}
-                        description={product.description}
-                        price={product.price}
-                        addToCard={(id) => this.addToCard(id)}
-                      />
-                    </Col>
-                  ))
-                }
+                {this.props.products.map((product, i) => (
+                  <Col xs="3">
+                    <ProductItem
+                      key={i}
+                      productId={product.id}
+                      title={product.title}
+                      image={product.image}
+                      description={product.description}
+                      price={product.price}
+                      addToCard={(id) => this.addToCard(id)}
+                    />
+                  </Col>
+                ))}
+                  
+                <RefreshDataArrow loading={this.state.loading}  />
               </Row>
             </Col>
           </Row>
         </Container>
-      </section>
+      </div>
     );
   }
 }
