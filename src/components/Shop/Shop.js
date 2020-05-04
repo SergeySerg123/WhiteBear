@@ -5,8 +5,6 @@ import ProductItem from "./ProductItem/ProductItem";
 import { connect } from "react-redux";
 import { addToCard } from "../../store/actions/card.action";
 import { loadProducts } from "../../services/Shop";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSync } from "@fortawesome/free-solid-svg-icons";
 import  RefreshDataArrow  from "./RefreshDataArrow/RefreshDataArrow";
 
 class Shop extends React.Component {
@@ -20,33 +18,11 @@ class Shop extends React.Component {
 
   componentDidMount() {
     this.props.onLoadProducts();
-    // Detect when scrolled to bottom.
     window.addEventListener("scroll", this.onScrollHandler);
   }
 
   componentWillUnmount() {
     window.removeEventListener("scroll", this.onScrollHandler);
-  }
-
-  
-
-  showItems() {
-    let items = [];
-    for (let i = 0; i < this.state.items; i++) {
-      items.push(<li key={i}>Item {i}</li>);
-    }
-    return items;
-  }
-
-  addToCard(id) {
-    const item = this.props.products.find((item) => item.id === id);
-    if (item != null) {
-      this.props.onAddToCard(item);
-    }
-  }
-
-  loadMore() {
-    console.log('load more');
   }
 
   onScrollHandler = () => {
@@ -55,9 +31,20 @@ class Shop extends React.Component {
       d.scrollTop + d.clientHeight >=
       this.refs.shopScroll.scrollHeight
     ) {
-      this.loadMore();
+      this.loadMoreItems();
     }
   };
+
+  loadMoreItems() {
+    console.log('load more');
+  }
+
+  addToCard(id) {
+    const item = this.props.products.find((item) => item.id === id);
+    if (item != null) {
+      this.props.onAddToCard(item);
+    }
+  }
 
   render() {
     return (
@@ -104,7 +91,7 @@ class Shop extends React.Component {
                   </Col>
                 ))}
                   
-                <RefreshDataArrow  />
+                <RefreshDataArrow loading={this.state.loading}  />
               </Row>
             </Col>
           </Row>
