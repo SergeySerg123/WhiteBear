@@ -14,13 +14,22 @@ class Shop extends React.Component {
 
   componentDidMount() {
     this.props.onLoadProducts();
+    window.addEventListener('scroll', this.onScrollToBottom);
   }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.onScrollToBottom);
+  } 
 
   addToCard(id) {
     const item = this.props.products.find((item) => item.id === id);
     if (item != null) {
       this.props.onAddToCard(item);
     }
+  }
+
+  onScrollToBottom = () => {
+    console.log('Scroll to bottom');
   }
 
   render() {
