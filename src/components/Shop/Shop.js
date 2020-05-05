@@ -11,7 +11,8 @@ class Shop extends React.Component {
   constructor() {
     super();
     this.state = {
-      items: 12
+      items: 8,
+      loadMore: false
     };
   }
 
@@ -21,21 +22,27 @@ class Shop extends React.Component {
   }
 
   componentWillUnmount() {
-    window.removeEventListener("scroll", this.onScrollHandler);
+    window.removeEventListener("scroll");
   }
 
   onScrollHandler = () => {
     const d = document.documentElement;
     if (
       d.scrollTop + d.clientHeight >=
-      this.refs.shopScroll.scrollHeight
+      this.refs.shopScroll.scrollHeight && !this.state.loadMore
     ) {
       this.loadMoreItems();
     }
   };
 
   loadMoreItems() {
-    console.log('load more');
+    if (this.props.isFull) return;
+
+    this.setState({loadMore: !this.state.loadMore, items: this.state.items + 4}, 
+      () => {
+        this.props.onLoadProducts(this.state.items);
+        this.state.loadMore = !this.state.loadMore;
+    });
   }
 
   addToCard(id) {
