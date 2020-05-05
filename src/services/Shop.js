@@ -6,7 +6,7 @@ export function loadProducts(items) {
     return (dispatch) => {
         dispatch(loadProductStartAction());
         Axios
-            .get(BASE_URL + '/api/beers/all?items=' + items)
+            .get(BASE_URL + '/api/beers/all?count=' + items)
             .then(res => dispatch(loadProductSucceedAction(res.data)))
             .catch(err => dispatch(loadProductFailuredAction()));
     }
