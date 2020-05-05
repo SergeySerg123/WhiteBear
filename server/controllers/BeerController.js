@@ -3,7 +3,8 @@ const BeerModel = require('../db/models/BeerModel');
 // routes: api/beers/
 const BeerController = {
     all: async (req, res) => {
-        const beers = await BeerModel.find();
+        const count = req.query.count;
+        const beers = await BeerModel.find().limit(parseInt(count));
         res.json(beers);
     },
 
