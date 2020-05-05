@@ -2,11 +2,11 @@ import { loadProductStartAction, loadProductSucceedAction, loadProductFailuredAc
 import Axios from "axios";
 import { BASE_URL } from "../config/config";
 
-export function loadProducts() {
+export function loadProducts(items) {
     return (dispatch) => {
         dispatch(loadProductStartAction());
         Axios
-            .get(BASE_URL + '/api/beers/all')
+            .get(BASE_URL + '/api/beers/all?items=' + items)
             .then(res => dispatch(loadProductSucceedAction(res.data)))
             .catch(err => dispatch(loadProductFailuredAction()));
     }

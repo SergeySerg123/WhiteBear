@@ -17,7 +17,7 @@ class Shop extends React.Component {
   }
 
   componentDidMount() {
-    this.props.onLoadProducts();
+    this.props.onLoadProducts(this.state.items);
     window.addEventListener("scroll", this.onScrollHandler);
   }
 
@@ -111,7 +111,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onAddToCard: (item) => dispatch(addToCard(item)),
-    onLoadProducts: () => dispatch(loadProducts()),
+    onLoadProducts: (items) => dispatch(loadProducts(items)),
   };
 };
 
