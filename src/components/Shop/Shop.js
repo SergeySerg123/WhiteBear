@@ -11,7 +11,7 @@ class Shop extends React.Component {
   constructor() {
     super();
     this.state = {
-      items: 8,
+      items: 12,
       loadMore: false
     };
   }
@@ -38,7 +38,7 @@ class Shop extends React.Component {
   loadMoreItems() {
     if (this.props.isFull) return;
 
-    this.setState({loadMore: !this.state.loadMore, items: this.state.items + 4}, 
+    this.setState({loadMore: !this.state.loadMore, items: this.state.items + 12}, 
       () => {
         this.props.onLoadProducts(this.state.items);
         this.state.loadMore = !this.state.loadMore;
