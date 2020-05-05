@@ -27,7 +27,7 @@ class RefreshDataArrow extends React.Component {
               this.props.loading ? this.initLoading() : this.interruptLoading()
             }
             icon={faSync}
-            size="4x"
+            size="3x"
           />
         )}
       </Col>
