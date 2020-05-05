@@ -11,8 +11,7 @@ class Shop extends React.Component {
   constructor() {
     super();
     this.state = {
-      items: 12,
-      loading: false
+      items: 12
     };
   }
 
@@ -91,7 +90,9 @@ class Shop extends React.Component {
                   </Col>
                 ))}
                   
-                <RefreshDataArrow loading={this.state.loading}  />
+                <RefreshDataArrow 
+                  isFull={this.props.isFull} 
+                  loading={this.props.loading}  />
               </Row>
             </Col>
           </Row>
@@ -105,6 +106,9 @@ const mapStateToProps = (state) => {
   return {
     card: state.card,
     products: state.shop.products,
+    loading: state.shop.loading,
+    isFull: state.shop.isFull,
+    hasError: state.shop.hasError
   };
 };
 
