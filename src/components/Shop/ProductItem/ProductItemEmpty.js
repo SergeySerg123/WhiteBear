@@ -15,7 +15,7 @@ import './ProductItem.scss';
 import Sckelet from "../../UI/Sckelet/Sckelet";
 
 const ProductItemEmpty = () => (
-  <Card className="product-item-card">
+  <Card className="product-item-card shine-card">
     <div className="img-area grey-background "></div>
     <CardBody>
       <CardTitle>
