@@ -5,7 +5,9 @@ const BeerController = {
     all: async (req, res) => {
         const count = req.query.count;
         const beers = await BeerModel.find().limit(parseInt(count));
-        res.json(beers);
+        const beersMaxCount = await BeerModel.find().count();
+        const isFull = (beersMaxCount === beers.length);
+        res.json({beerItems: beers, isFull: isFull});
     },
 
     getById: async (req, res) => {
