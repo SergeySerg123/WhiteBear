@@ -6,6 +6,7 @@ import {
 
 const initialState = {
     products: [],
+    isFull: false,
     loading: false,
     succeed: false,
     hasError: false
@@ -17,6 +18,7 @@ export function shop (state = initialState, action) {
             ...state,
             loading: true,
             succeed: false,
+            isFull: false,
             hasError: false
         }
     }
@@ -27,7 +29,8 @@ export function shop (state = initialState, action) {
             loading: false,
             succeed: true,
             hasError: false,
-            products: [...action.payload]
+            isFull: action.payload.isFull,
+            products: [...action.payload.beerItems]
         }
     }
 
@@ -36,7 +39,8 @@ export function shop (state = initialState, action) {
             ...state,
             loading: false,
             succeed: false,
-            hasError: true
+            hasError: true,
+            isFull: false
         }
     }
 

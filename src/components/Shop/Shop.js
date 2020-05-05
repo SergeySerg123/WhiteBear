@@ -12,7 +12,7 @@ class Shop extends React.Component {
     super();
     this.state = {
       items: 12,
-      loading: false
+      loadMore: false
     };
   }
 
@@ -22,21 +22,27 @@ class Shop extends React.Component {
   }
 
   componentWillUnmount() {
-    window.removeEventListener("scroll", this.onScrollHandler);
+    window.removeEventListener("scroll");
   }
 
   onScrollHandler = () => {
     const d = document.documentElement;
     if (
       d.scrollTop + d.clientHeight >=
-      this.refs.shopScroll.scrollHeight
+      this.refs.shopScroll.scrollHeight && !this.state.loadMore
     ) {
       this.loadMoreItems();
     }
   };
 
   loadMoreItems() {
-    console.log('load more');
+    if (this.props.isFull) return;
+
+    this.setState({loadMore: !this.state.loadMore, items: this.state.items + 12}, 
+      () => {
+        this.props.onLoadProducts(this.state.items);
+        this.state.loadMore = !this.state.loadMore;
+    });
   }
 
   addToCard(id) {
@@ -91,7 +97,9 @@ class Shop extends React.Component {
                   </Col>
                 ))}
                   
-                <RefreshDataArrow loading={this.state.loading}  />
+                <RefreshDataArrow 
+                  isFull={this.props.isFull} 
+                  loading={this.props.loading}  />
               </Row>
             </Col>
           </Row>
@@ -105,6 +113,9 @@ const mapStateToProps = (state) => {
   return {
     card: state.card,
     products: state.shop.products,
+    loading: state.shop.loading,
+    isFull: state.shop.isFull,
+    hasError: state.shop.hasError
   };
 };
 
