@@ -7,6 +7,7 @@ import { Provider } from "react-redux";
 import Main from "./components/Main/Main";
 import Shop from './components/Shop/Shop';
 import { withHeader } from "./components/hoc/withHeader";
+import 'typeface-roboto';
 
 export default class App extends Component {
   static displayName = App.name;

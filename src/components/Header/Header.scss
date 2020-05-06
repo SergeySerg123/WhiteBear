@@ -10,6 +10,13 @@
     width: 100%;
     box-shadow:-1px -8px 9px 4px rgba(0,0,0,0.99);
     
+    .process {
+        position: fixed;
+        width: 100%;
+        left: 0;
+        top: 70px;
+        z-index: 11;
+    }
 }
 
 .navbar-btn {

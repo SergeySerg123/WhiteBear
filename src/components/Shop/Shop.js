@@ -56,15 +56,13 @@ class Shop extends React.Component {
   };
 
   showEmptyProductItems = () => {
-    const { countItems, products } = this.props;
-    const totalProducts = products.length;
+    const { countItems } = this.props;
     let arr = [];
     if (this.props.loading) {
       for (let i = 0; i < countItems; i++) {
         arr.push(i);
       }
     }
-
     return arr;
   };
 
@@ -98,7 +96,7 @@ class Shop extends React.Component {
               </div>
             </Col>
             <Col xs="10">
-              <Row>             
+              <Row>
                 {this.props.products.map((product, i) => (
                   <Col xs="3">
                     <ProductItem
@@ -111,16 +109,14 @@ class Shop extends React.Component {
                       addToCard={(id) => this.addToCard(id)}
                     />
                   </Col>
-                  ))
-                  
-                }
+                ))}
 
-                {this.showEmptyProductItems().map(el => (
+                {this.showEmptyProductItems().map((el) => (
                   <Col xs="3">
                     <ProductItemEmpty />
                   </Col>
-                ))}  
-                
+                ))}
+
                 <RefreshDataArrow
                   isFull={this.props.isFull}
                   loading={this.props.loading}

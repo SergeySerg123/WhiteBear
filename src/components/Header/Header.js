@@ -12,6 +12,7 @@ import CardCounter from '../Card/CardCounter/CardCounter';
 import "./Header.scss";
 import Card from "../Card/Card";
 import { connect } from "react-redux";
+import LinearProgress from '@material-ui/core/LinearProgress';
 
 class Header extends React.Component {
   constructor() {
@@ -68,6 +69,7 @@ class Header extends React.Component {
             </Col>
           </Row>
         </Container>
+        {this.props.loading && <LinearProgress className="process" />}      
       </header>
     );
   }
@@ -75,7 +77,8 @@ class Header extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    itemsInCard: state.card.products.length
+    itemsInCard: state.card.products.length,
+    loading: state.shop.loading
   }
 }
 
