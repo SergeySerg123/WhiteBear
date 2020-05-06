@@ -14,11 +14,8 @@ import Counter from "../../Counter/Counter";
 import Bottle from "../Bottle/Bottle";
 
 const productItem = (props) => {
-  function addToCard(id) {
-    props.addToCard(id);
-  }
 
-  const img = require("../../../assets/pics/" + props.image);
+  // const img = require("../../../assets/pics/" + props.image);
   return (
     <Card className="product-item-card">
       <CardImg
@@ -26,7 +23,7 @@ const productItem = (props) => {
         className="card-img"
         width="100%"
         className="grey-background"
-        src={img}
+        // src={img}
         alt="Card image cap"
       />
       <CardBody>
@@ -47,7 +44,7 @@ const productItem = (props) => {
           <Counter />
           <Bottle />        
           <Button
-            onClick={() => addToCard(props.productId)}
+            onClick={() => props.addToCard(props.productId)}
             size="sm"
             color="primary"
             className="color-btn"
