@@ -9,7 +9,8 @@ const initialState = {
     isFull: false,
     loading: false,
     succeed: false,
-    hasError: false
+    hasError: false,
+    countItems: 8
 };
 
 export function shop (state = initialState, action) {
@@ -30,7 +31,8 @@ export function shop (state = initialState, action) {
             succeed: true,
             hasError: false,
             isFull: action.payload.isFull,
-            products: [...action.payload.beerItems]
+            products: [...action.payload.beerItems],
+            countItems: action.payload.countItems
         }
     }
 
