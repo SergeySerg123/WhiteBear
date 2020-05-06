@@ -14,7 +14,8 @@ import Counter from "../../Counter/Counter";
 import Bottle from "../Bottle/Bottle";
 
 const productItem = (props) => {
-  // const img = require("../../../assets/pics/" + props.image);
+  const img = require("../../../assets/pics/" + props.image);
+  console.log();
   return (
     <Card className="product-item-card">
       <CardImg
@@ -22,7 +23,7 @@ const productItem = (props) => {
         className="card-img"
         width="100%"
         className="grey-background"
-        // src={img}
+        src={img}
         alt="Card image cap"
       />
       <CardBody>
