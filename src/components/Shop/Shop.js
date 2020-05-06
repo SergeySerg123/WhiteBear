@@ -5,7 +5,7 @@ import ProductItem from "./ProductItem/ProductItem";
 import { connect } from "react-redux";
 import { addToCard } from "../../store/actions/card.action";
 import { loadProducts } from "../../services/Shop";
-import  RefreshDataArrow  from "./RefreshDataArrow/RefreshDataArrow";
+import RefreshDataArrow from "./RefreshDataArrow/RefreshDataArrow";
 import ProductItemEmpty from "./ProductItemEmpty/ProductItemEmpty";
 
 class Shop extends React.Component {
@@ -13,7 +13,7 @@ class Shop extends React.Component {
     super();
     this.state = {
       items: 12,
-      loadMore: false
+      loadMore: false,
     };
   }
 
@@ -29,33 +29,48 @@ class Shop extends React.Component {
   onScrollHandler = () => {
     const d = document.documentElement;
     if (
-      d.scrollTop + d.clientHeight >=
-      this.refs.shopScroll.scrollHeight && !this.state.loadMore
+      d.scrollTop + d.clientHeight >= this.refs.shopScroll.scrollHeight &&
+      !this.state.loadMore
     ) {
       this.loadMoreItems();
     }
   };
 
-  loadMoreItems() {
+  loadMoreItems = () => {
     if (this.props.isFull) return;
 
-    this.setState({loadMore: !this.state.loadMore, items: this.state.items + 12}, 
+    this.setState(
+      { loadMore: !this.state.loadMore, items: this.state.items + 12 },
       () => {
         this.props.onLoadProducts(this.state.items);
         this.state.loadMore = !this.state.loadMore;
-    });
-  }
+      }
+    );
+  };
 
-  addToCard(id) {
+  addToCard = (id) => {
     const item = this.props.products.find((item) => item.id === id);
     if (item != null) {
       this.props.onAddToCard(item);
     }
-  }
+  };
+
+  showEmptyProductItems = () => {
+    const { countItems, products } = this.props;
+    const totalProducts = products.length;
+    let arr = [];
+    if (this.props.loading) {
+      for (let i = 0; i < countItems; i++) {
+        arr.push(i);
+      }
+    }
+
+    return arr;
+  };
 
   render() {
     return (
-      <div className="shop-section" ref="shopScroll" >
+      <div className="shop-section" ref="shopScroll">
         <Container fluid="sm">
           <Row>
             <Col xs="2" className="right-border pl-3">
@@ -83,23 +98,7 @@ class Shop extends React.Component {
               </div>
             </Col>
             <Col xs="10">
-              <Row>
-
-              <Col xs="3">
-                  <ProductItemEmpty />
-                </Col>
-
-                <Col xs="3">
-                  <ProductItemEmpty />
-                </Col>
-
-                <Col xs="3">
-                  <ProductItemEmpty />
-                </Col>
-
-                <Col xs="3">
-                  <ProductItemEmpty />
-                </Col>
+              <Row>             
                 {this.props.products.map((product, i) => (
                   <Col xs="3">
                     <ProductItem
@@ -112,10 +111,20 @@ class Shop extends React.Component {
                       addToCard={(id) => this.addToCard(id)}
                     />
                   </Col>
-                ))}
-                <RefreshDataArrow 
-                  isFull={this.props.isFull} 
-                  loading={this.props.loading}  />
+                  ))
+                  
+                }
+
+                {this.showEmptyProductItems().map(el => (
+                  <Col xs="3">
+                    <ProductItemEmpty />
+                  </Col>
+                ))}  
+                
+                <RefreshDataArrow
+                  isFull={this.props.isFull}
+                  loading={this.props.loading}
+                />
               </Row>
             </Col>
           </Row>
@@ -131,7 +140,8 @@ const mapStateToProps = (state) => {
     products: state.shop.products,
     loading: state.shop.loading,
     isFull: state.shop.isFull,
-    hasError: state.shop.hasError
+    hasError: state.shop.hasError,
+    countItems: state.shop.countItems,
   };
 };
 
