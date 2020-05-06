@@ -74,7 +74,7 @@ class Shop extends React.Component {
   render() {
     return (
       <div className="shop-section" ref="shopScroll">
-        <Container fluid="sm">
+        <Container fluid>
           <Row>
             <Col xs="2" className="right-border pl-3">
               <div className="catalog-title">
@@ -103,9 +103,8 @@ class Shop extends React.Component {
             <Col xs="10">
               <Row>
                 {this.props.products.map((product, i) => (
-                  <Col xs="3">
+                  <Col key={i} xs="3">
                     <ProductItem
-                      key={i}
                       productId={product.id}
                       title={product.title}
                       image={product.image}
