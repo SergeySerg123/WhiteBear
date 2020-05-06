@@ -66,6 +66,11 @@ class Shop extends React.Component {
     return arr;
   };
 
+  calcDiff = () => {
+    const { countItems, products } = this.props;
+    return countItems - products.length;
+  }
+
   render() {
     return (
       <div className="shop-section" ref="shopScroll">
@@ -111,11 +116,7 @@ class Shop extends React.Component {
                   </Col>
                 ))}
 
-                {this.showEmptyProductItems().map((el) => (
-                  <Col xs="3">
-                    <ProductItemEmpty />
-                  </Col>
-                ))}
+                <ProductItemEmpty items={this.calcDiff()} />
 
                 <RefreshDataArrow
                   isFull={this.props.isFull}
