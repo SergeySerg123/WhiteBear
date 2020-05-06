@@ -5,7 +5,7 @@ import {
   CardBody,
   CardTitle,
   CardText,
-  Button
+  Button,
 } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
@@ -14,7 +14,6 @@ import Counter from "../../Counter/Counter";
 import Bottle from "../Bottle/Bottle";
 
 const productItem = (props) => {
-
   // const img = require("../../../assets/pics/" + props.image);
   return (
     <Card className="product-item-card">
@@ -28,9 +27,10 @@ const productItem = (props) => {
       />
       <CardBody>
         <CardTitle>{props.title}</CardTitle>
+
+        <CardText>{props.description}</CardText>
         <CardText>
-  <CardText>{props.description}</CardText>
-          <div className="raiting">
+          <span className="raiting">
             <FontAwesomeIcon icon={faStar} />
             <FontAwesomeIcon icon={faStar} />
             <FontAwesomeIcon icon={faStar} />
@@ -38,11 +38,11 @@ const productItem = (props) => {
             <FontAwesomeIcon className="raiting-negative" icon={faStar} />
 
             <span className="price-color">{props.price} грн. за кг</span>
-          </div>
+          </span>
         </CardText>
         <div className="d-flex justify-content-between">
           <Counter />
-          <Bottle />        
+          <Bottle />
           <Button
             onClick={() => props.addToCard(props.productId)}
             size="sm"
