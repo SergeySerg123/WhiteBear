@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import { addToCard } from "../../store/actions/card.action";
 import { loadProducts } from "../../services/Shop";
 import  RefreshDataArrow  from "./RefreshDataArrow/RefreshDataArrow";
+import ProductItemEmpty from "./ProductItemEmpty/ProductItemEmpty";
 
 class Shop extends React.Component {
   constructor() {
@@ -83,6 +84,22 @@ class Shop extends React.Component {
             </Col>
             <Col xs="10">
               <Row>
+
+              <Col xs="3">
+                  <ProductItemEmpty />
+                </Col>
+
+                <Col xs="3">
+                  <ProductItemEmpty />
+                </Col>
+
+                <Col xs="3">
+                  <ProductItemEmpty />
+                </Col>
+
+                <Col xs="3">
+                  <ProductItemEmpty />
+                </Col>
                 {this.props.products.map((product, i) => (
                   <Col xs="3">
                     <ProductItem
@@ -96,7 +113,6 @@ class Shop extends React.Component {
                     />
                   </Col>
                 ))}
-                  
                 <RefreshDataArrow 
                   isFull={this.props.isFull} 
                   loading={this.props.loading}  />
