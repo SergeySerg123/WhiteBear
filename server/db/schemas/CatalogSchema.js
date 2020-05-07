@@ -5,7 +5,11 @@ const CatalogSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    category: [{
+    parentCategory: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Categories"
+    },
+    categories: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Categories"
     }],
