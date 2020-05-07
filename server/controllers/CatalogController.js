@@ -46,6 +46,10 @@ const CatalogController = {
     const result = await CatalogModel.findByIdAndDelete({_id: req.params.id});
     res.json(result);
   },
+
+  clearCatalog: (req, res) => {
+      CatalogModel.remove({}, (err) => console.log(err));
+  }
 };
 
 const findCategoryById = async (id) => {
