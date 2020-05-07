@@ -42,7 +42,10 @@ const CatalogController = {
     });
   },
 
-  delete: async (req, res) => {},
+  delete: async (req, res) => {
+    const result = await CatalogModel.findByIdAndDelete({_id: req.params.id});
+    res.json(result);
+  },
 };
 
 const findCategoryById = async (id) => {
