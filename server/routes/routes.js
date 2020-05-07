@@ -15,6 +15,5 @@ router.get('/api/catalog/:id', CatalogController.getById);
 router.put('/api/catalog/:id', CatalogController.update);
 router.post('/api/catalog', CatalogController.create);
 router.delete('/api/catalog/:id', CatalogController.delete);
-router.delete('/api/catalog/clearCatalog', CatalogController.clearCatalog);
 
 module.exports = router;
