@@ -10,7 +10,7 @@ const CatalogController = {
   },
 
   getById: async (req, res) => {
-    const category = await this.findCategoryById(req.params.id);
+    const category = await findCategoryById(req.params.id);
     res.json(category);
   },
 
@@ -21,7 +21,7 @@ const CatalogController = {
   },
 
   update: async (req, res) => {
-
+    
     //TODO data validation
     const update = {
       title: req.body.title,
@@ -43,13 +43,13 @@ const CatalogController = {
   },
 
   delete: async (req, res) => {},
-
-  findCategoryById: async (id) => {
-    return await CatalogModel.findById({ _id: id })
-      .populate("categories")
-      .populate("beers")
-      .populate("parentCategory");
-  },
 };
+
+const findCategoryById = async (id) => {
+    return await CatalogModel.findById({ _id: id })
+    .populate("categories")
+    .populate("beers")
+    .populate("parentCategory");
+}
 
 module.exports = CatalogController;
